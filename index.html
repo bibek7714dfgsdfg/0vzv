@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="0VZV — a full-stack developer building fast, thoughtful digital products." />
+  <title>0VZV</title>
+  <style>
+    :root { --ink:#f2f2f0; --muted:#9b9b9d; --line:rgba(255,255,255,.13); --bg:#0b0b0c; --lime:#dfff45; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:#000; color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; overflow-x:hidden; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+    body:before { content:""; position:fixed; inset:0; pointer-events:none; background:radial-gradient(circle at 50% 0%, rgba(255,255,255,.045), transparent 34%), linear-gradient(180deg,rgba(255,255,255,.018),transparent 30%); z-index:-1; }
+    a { color:inherit; text-decoration:none; }
+    .shell { width:min(1240px, calc(100% - 72px)); margin:auto; }
+    nav { height:94px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); }
+    .logo { font-size:18px; letter-spacing:.16em; font-weight:800; color:transparent; background:linear-gradient(110deg,#ffffff 0%,#8f8f94 45%,#ffffff 62%,#d7d7d9 100%); background-size:220% 100%; -webkit-background-clip:text; background-clip:text; animation:monochromeFlow 9s ease-in-out infinite; }
+    .logo span { color:inherit; }
+    .navlinks { display:flex; gap:34px; font-size:13px; color:#b9b9bb; }
+    .navlinks a:hover { color:var(--ink); }
+    .nav-cta { border:1px solid var(--line); padding:12px 18px; font-size:12px; transition:.2s; }
+    .nav-cta:hover { background:var(--ink); color:var(--bg); }
+    .hero { min-height:690px; display:flex; flex-direction:column; justify-content:center; padding:85px 0 110px; position:relative; }
+    .eyebrow { width:max-content; border:1px solid var(--line); padding:7px 10px; color:#aaa; font:10px/1 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing:.11em; margin-bottom:36px; }
+    .eyebrow { animation:loadingPulse 2s ease-in-out infinite; }
+    .eyebrow:after { content:""; display:inline-block; width:5px; height:10px; margin-left:4px; background:#aaa; vertical-align:-1px; animation:cursorBlink .8s steps(1) infinite; }
+    @keyframes loadingPulse { 0%,100% { opacity:.55; } 50% { opacity:1; } }
+    @keyframes cursorBlink { 50% { opacity:0; } }
+    @keyframes smoothReveal { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+    nav { animation:smoothReveal .75s .05s both; }
+    .hero > * { opacity:0; animation:smoothReveal .8s both; }
+    .hero > .eyebrow { animation-delay:.18s; }
+    .hero > .availability { animation-delay:.3s; }
+    .hero > h1 { animation-delay:.42s; }
+    .hero > .hero-bottom { animation-delay:.58s; }
+    main > section:not(.hero) { opacity:0; animation:smoothReveal .85s .72s both; }
+    main > section:not(.hero) + section { animation-delay:.86s; }
+    footer { opacity:0; animation:smoothReveal .8s 1s both; }
+    .availability { display:flex; align-items:center; gap:16px; color:#e4e4e5; font:700 12px ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing:.12em; margin:0 0 31px; }
+    .availability:before { content:""; width:42px; height:1px; background:rgba(255,255,255,.28); }
+    h1 { font-size:clamp(78px, 15vw, 218px); line-height:.77; letter-spacing:-.09em; margin:0 0 46px; font-weight:800; color:transparent; background:linear-gradient(110deg,#ffffff 0%,#8f8f94 45%,#ffffff 62%,#d7d7d9 100%); background-size:220% 100%; -webkit-background-clip:text; background-clip:text; animation:monochromeFlow 9s ease-in-out infinite; }
+    h1 .outline { color:transparent; -webkit-text-stroke:0; }
+    @keyframes monochromeFlow { 0%,100% { background-position:0% 50%; } 50% { background-position:100% 50%; } }
+    .hero-bottom { display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,.72fr); align-items:center; gap:45px; }
+    .hero-copy { max-width:690px; }
+    .hero-copy h2 { font-size:clamp(21px, 2.5vw, 32px); line-height:1.1; letter-spacing:-.045em; margin:0 0 21px; }
+    .hero-copy p { max-width:540px; color:var(--muted); line-height:1.7; font-size:16px; margin:0; }
+    .scroll-note { color:#777; font:10px ui-monospace, monospace; letter-spacing:.15em; display:flex; gap:14px; align-items:center; }
+    .scroll-note:before { content:""; display:block; width:42px; height:1px; background:var(--lime); }
+    .hero-art { grid-column:2; grid-row:1 / span 2; display:flex; align-items:center; justify-content:center; min-height:390px; position:relative; top:-58px; }
+    .hero-art:before { content:""; position:absolute; width:90%; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle,rgba(40,83,100,.34),transparent 68%); filter:blur(24px); }
+    .hero-art img { position:relative; width:100%; max-width:430px; max-height:480px; object-fit:contain; filter:drop-shadow(0 25px 34px rgba(0,0,0,.62)); animation:minecraftFloat 6s ease-in-out infinite; transition:transform .5s ease, filter .5s ease; }
+    .hero-art:hover img { transform:scale(1.035) rotate(1deg); filter:drop-shadow(0 30px 45px rgba(0,0,0,.76)); }
+    .minecraft-showcase { border-top:1px solid var(--line); padding:44px 0 95px; display:grid; grid-template-columns:1.1fr .9fr; gap:70px; align-items:center; overflow:hidden; }
+    .minecraft-art { position:relative; min-height:420px; display:flex; align-items:center; justify-content:center; }
+    .minecraft-art:before { content:""; position:absolute; width:70%; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle,rgba(75,120,135,.3),transparent 68%); filter:blur(18px); }
+    .minecraft-art img { display:block; width:min(100%,560px); max-height:570px; object-fit:contain; position:relative; filter:drop-shadow(0 24px 35px rgba(0,0,0,.55)); animation:minecraftFloat 6s ease-in-out infinite; transition:transform .5s ease, filter .5s ease; }
+    .minecraft-art:hover img { transform:scale(1.035) rotate(1deg); filter:drop-shadow(0 30px 45px rgba(0,0,0,.7)); }
+    @keyframes minecraftFloat { 0%,100% { transform:translateY(0) rotate(-1deg); } 50% { transform:translateY(-14px) rotate(1deg); } }
+    .minecraft-copy .section-label { display:block; margin-bottom:24px; }
+    .minecraft-copy h3 { margin-bottom:22px; }
+    .minecraft-copy p { color:var(--muted); max-width:430px; line-height:1.7; font-size:15px; }
+    .minecraft-pill { display:inline-block; margin-top:18px; color:#b8ff62; border:1px solid rgba(184,255,98,.35); padding:10px 13px; font:10px ui-monospace,monospace; letter-spacing:.1em; }
+    .socials { border-top:1px solid var(--line); padding:95px 0 40px; }
+    .socials-intro { margin-bottom:28px; }
+    .socials-intro .section-label { display:block; margin-bottom:18px; }
+    .socials-intro p { color:var(--muted); margin:14px 0 0; font-size:15px; }
+    .social-row { display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--line); padding:20px 2px; transition:color .2s, padding .2s; }
+    .social-row:hover { color:var(--lime); padding-left:8px; padding-right:8px; }
+    .social-name { display:flex; align-items:center; gap:18px; font-size:20px; font-weight:700; letter-spacing:-.03em; }
+    .discord-mark { width:28px; height:20px; border:2px solid currentColor; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-size:10px; }
+    .social-handle { color:#777; font:12px ui-monospace,monospace; }
+    section { border-top:1px solid var(--line); padding:95px 0; }
+    .section-head { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:55px; }
+    .section-label { color:var(--lime); font:11px ui-monospace, monospace; letter-spacing:.16em; }
+    h3 { font-size:clamp(34px, 5vw, 62px); letter-spacing:-.07em; line-height:.95; margin:0; font-weight:700; }
+    .services { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+    .service { background:rgba(14,14,16,.76); padding:31px 28px 36px; min-height:260px; transition:background .25s, transform .25s; }
+    .service:hover { background:#17171a; transform:translateY(-5px); }
+    .service-number { color:#666; font:11px ui-monospace, monospace; }
+    .service h4 { font-size:24px; letter-spacing:-.04em; margin:72px 0 13px; }
+    .service p { color:var(--muted); font-size:14px; line-height:1.6; margin:0; }
+    .work-grid { display:grid; grid-template-columns:1.4fr 1fr; gap:18px; }
+    .project { min-height:330px; padding:28px; display:flex; flex-direction:column; justify-content:space-between; border:1px solid var(--line); background:linear-gradient(135deg, #202935, #101114 65%); transition:.25s; }
+    .project:nth-child(2) { background:linear-gradient(135deg, #453b24, #171613 75%); }
+    .project:nth-child(3) { background:linear-gradient(135deg, #222521, #101111 75%); min-height:220px; }
+    .project:hover { transform:scale(.99); border-color:rgba(223,255,69,.48); }
+    .tag { font:10px ui-monospace, monospace; color:#b5b5b6; letter-spacing:.1em; }
+    .project h4 { font-size:36px; letter-spacing:-.06em; margin:0 0 12px; }
+    .project p { color:#a7a7a8; max-width:410px; font-size:14px; line-height:1.55; margin:0; }
+    .project a { color:var(--lime); font:12px ui-monospace, monospace; margin-top:25px; }
+    .contact { display:flex; justify-content:space-between; gap:30px; align-items:flex-end; }
+    .contact h3 { max-width:600px; }
+    .contact-link { color:var(--lime); font-size:clamp(18px, 2vw, 26px); border-bottom:1px solid var(--lime); padding-bottom:8px; }
+    .hire-badge { display:inline-block; margin-top:22px; border:1px solid rgba(223,255,69,.5); color:var(--lime); padding:10px 13px; font:700 11px ui-monospace,monospace; letter-spacing:.1em; transition:.25s; }
+    .hire-badge:hover { background:var(--lime); color:#000; transform:translateY(-2px); }
+    footer { border-top:1px solid var(--line); padding:25px 0 34px; color:#6e6e70; display:flex; justify-content:space-between; font:11px ui-monospace, monospace; }
+    @media (max-width:700px) { .shell { width:min(100% - 36px, 1240px); } nav { height:76px; } .navlinks { display:none; } .hero { min-height:620px; padding:70px 0 80px; } h1 { font-size:25vw; margin-bottom:40px; } .hero-bottom, .contact { display:block; } .hero-art { top:-20px; min-height:330px; } .scroll-note { margin-top:38px; } section { padding:70px 0; } .minecraft-showcase { display:flex; flex-direction:column-reverse; gap:20px; padding:30px 0 70px; } .minecraft-art { min-height:300px; } .minecraft-art img { max-height:390px; } .section-head { display:block; margin-bottom:34px; } .section-label { display:block; margin-bottom:18px; } .services, .work-grid { grid-template-columns:1fr; } .service { min-height:210px; } .service h4 { margin-top:48px; } .project { min-height:260px !important; } .contact-link { display:inline-block; margin-top:30px; } footer { gap:20px; flex-direction:column; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <nav>
+      <a class="logo" href="#top">0V<span>Z</span>V</a>
+      <div class="navlinks"><a href="#services">Services</a><a href="#contact">Contact</a></div>
+      <a class="nav-cta" href="#contact">Let’s work together ↗</a>
+    </nav>
+
+    <main id="top">
+      <section class="hero" style="border-top:0">
+        <div class="eyebrow"><span id="statusText"></span></div>
+        <div class="availability">AVAILABLE FOR WORK</div>
+        <h1>0V<span class="outline">Z</span>V</h1>
+        <div class="hero-bottom">
+          <div class="hero-copy"><h2>Minecraft developer — custom SMPs, plugins, and gameplay systems that players remember.</h2><p>I build unique Minecraft experiences end to end, from custom server features and plugins to smooth systems that keep your community coming back.</p></div>
+          <div class="hero-art"><img src="minecraft-character.png" alt="Minecraft character holding a diamond sword and totem" /></div>
+          <div class="scroll-note">SCROLL TO EXPLORE</div>
+        </div>
+      </section>
+
+      <section id="services">
+        <div class="section-head"><span class="section-label">01 / WHAT I DO</span><h3>Built for the<br>real world.</h3></div>
+        <div class="services">
+          <article class="service"><span class="service-number">01</span><h4>Web development</h4><p>Responsive, high-performance websites and applications that feel effortless to use.</p></article>
+          <article class="service"><span class="service-number">02</span><h4>Discord Developer</h4><p>Custom Discord bots, useful automations, and polished community systems built for your server.</p></article>
+          <article class="service"><span class="service-number">03</span><h4>Minecraft SMP Dev</h4><p>Plugins, features, and custom systems that make your Minecraft SMP unique and fun to play.</p></article>
+        </div>
+      </section>
+
+      <section class="socials">
+        <div class="socials-intro"><span class="section-label">ELSEWHERE</span><h3>Where to find me</h3><p>Code, mods, and the community.</p></div>
+        <a class="social-row" href="https://discord.com" target="_blank" rel="noreferrer"><span class="social-name"><span class="discord-mark">••</span>Discord</span><span class="social-handle">@7s.xzz&nbsp;&nbsp; OPEN ↗</span></a>
+      </section>
+
+      <section id="contact" class="contact"><div><h3>Have a project<br>in mind?</h3><a class="hire-badge" href="https://discord.com" target="_blank" rel="noreferrer">HIRE ME FOR JUST $5 ↗</a></div><a class="contact-link" href="https://discord.com" target="_blank" rel="noreferrer">@7s.xzz ↗</a></section>
+    </main>
+    <footer><span>© 2025 0VZV</span><span>DESIGNED + BUILT WITH INTENT</span></footer>
+  </div>
+  <script>
+    const statusText = document.getElementById('statusText');
+    const username = '@7s.xzz';
+    let character = 0;
+    function typeUsername() {
+      statusText.textContent = username.slice(0, character);
+      if (character < username.length) {
+        character += 1;
+        setTimeout(typeUsername, 115);
+      }
+    }
+    typeUsername();
+  </script>
+</body>
+</html>
